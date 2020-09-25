@@ -5,9 +5,9 @@ from bs4 import BeautifulSoup
 
 
 def product():
-    url = "https://www.amazon.fr/ASUS-ZEPHYRUS-G14-GA401IH-007T-Portable-R7-4800HS-NVIDIA-GeForce-GTX-1650/dp/B08BG8DV51/ref=sr_1_1?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=asus%2Bzephyrus%2Bg14&qid=1601059241&sr=8-1&th=1"
+    url = ""
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
+        "User-Agent": ""
         }
     details = {'Title': "", "Price": 0, "Deal": True, "Budget": "" , "url": ""}
 
@@ -16,7 +16,7 @@ def product():
     title = soup.find(id="productTitle")
     title = title.get_text().strip()
     price = soup.find(id="priceblock_dealprice")
-    budget = 1100
+    budget = 1000
 
     if price is None:
         price = soup.find(id="priceblock_ourprice")
@@ -28,7 +28,7 @@ def product():
         details["budget"] = budget
 
     datasheet = pd.DataFrame([details])
-    datasheet.to_csv(r"C:\Users\xatom\Desktop\AmazonTracker\AsusZephyrusG14.csv", mode='a' , index=False , header=False)
+    datasheet.to_csv(r"C:\Users\xatom\Desktop\AmazonTracker\Datasheet.csv", mode='a' , index=False , header=False)
     print(datasheet)
 
     return details
